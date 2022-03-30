@@ -1,0 +1,272 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #353535;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 12px;
+}
+
+#photo-edit {
+	width: 100vw;
+	height: 100vh;
+	background-color: #303030;
+	color: white;
+	transition: all 1s ease-in;
+}
+
+/* Buttons not available before the image is loaded */
+.rotate-buttons,
+#bottom-controls {
+	display: none;
+}
+
+/* Display those buttons once the image is loaded */
+#photo-edit.image-loaded .rotate-buttons,
+#photo-edit.image-loaded #bottom-controls {
+	display: block;
+}
+
+/* Hide those buttons once the image is loaded */
+#photo-edit.image-loaded .input-file {
+	display: none;
+}
+
+.top-buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+.top-buttons .input-file,
+.top-buttons .rotate-buttons {
+	box-sizing: border-box;
+	margin: 0.5em;
+}
+
+.top-buttons .input-file img,
+.top-buttons .rotate-buttons img {
+	width: 100%;
+	height: 100%;
+}
+
+.top-buttons .input-file {
+	left: 0;
+	width: 2em;
+	height: 2em;
+	padding: 0.5em;
+	display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.top-buttons .rotate-buttons {
+	right: 0;
+}
+
+.top-buttons .rotate-buttons > div {
+	display: flex;
+}
+
+.top-buttons .rotate-buttons > div > div {
+	width: 2em;
+	height: 2em;
+	color: white;
+	fill: white;
+}
+
+.top-buttons .rotate-buttons > div > div > svg {
+	width: 100%;
+	height: 100%;
+	color: white;
+	fill: white;
+}
+
+canvas {
+	max-width: 100vw;
+}
+
+.controls {
+	padding: 1em;
+	width: 100%;
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: rgba(48, 48, 48, 0.3);
+}
+
+.controls .sliders {
+	width: 100%;
+}
+
+.controls .sliders .slider {
+	display: flex;
+	margin: 5px 0;
+	text-align: left;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.buttons > div {
+	display: flex;
+}
+
+.buttons .button {
+	width: 100%;
+	font-family:  'Ubuntu', sans-serif;
+	background-color: #444;
+	border: 1px solid #222;
+	border-radius: 5px;
+	padding: 5px 10px;
+	color: #ededed;
+	cursor: pointer;
+	margin: 2px auto;
+	transition: 0.3s;
+}
+
+.buttons .button:focus {
+	outline: none;
+	background-color: #333;
+}
+
+.buttons .button:hover {
+	background-color: #555;
+}
+
+.buttons .button[disabled] {
+	background-color: rgb(104, 104, 104);
+	color: black;
+}
+
+input {
+	text-align: center;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+
+label {
+	display: inline-block;
+	padding-left: 0;
+	width: 100px;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: 100%;
+	border-radius: 8px;
+	height: 12px;
+	background-color: #777;
+}
+
+input[type=range]::-moz-range-track {
+	-webkit-appearance: none;
+	width: 150px;
+	border-radius: 8px;
+	height: 3px;
+	background-color: #777;
+}
+
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #444;
+	border: 1px solid #bdc3c7;;
+	width: 12px;
+	height: 12px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+	-webkit-appearance: none;
+	background-color: #444;
+	border: 1px solid #bdc3c7;
+	width: 12px;
+	height: 12px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.button.step1 {
+	padding: 10px;
+}
+
+.step2 {
+	display: none;
+}
+
+svg.icon > use {
+	transform-origin: 50% 50%;
+}
+
+svg.icon.right > use {
+	transform: rotate(180deg);
+}
+
+.loading {
+	opacity: 0;
+	pointer-events: none;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0, 0.7);
+	z-index: 10;
+	transition: all 1s ease-out;
+}
+
+.loading.shown {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.loading .spin {
+	width: 50px;
+	height: 50px;
+	border-radius: 30%;
+	background-color: transparent;
+	border: 5px solid orange;
+	position: fixed;
+	top: calc(50% - 25px);
+	left: calc(50% - 25px);
+	animation-duration: 3s;
+	animation-name: changewidth;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-name: changewidth;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+.loading .label {
+	text-align: center;
+	color: white;
+	font-size: 2em;
+	width: 100%;
+	position: absolute;
+	bottom: 1rem;
+}
+
+@keyframes changewidth {
+	from {
+		width: 50px;
+		height: 50px;
+		-ms-transform: rotate(0deg); /* IE 9 */
+		-webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+		transform: rotate(0deg);
+		transform-origin: 50% 50%;
+	}
+
+	to {
+		width: 60px;
+		height: 60px;
+		-ms-transform: rotate(360deg); /* IE 9 */
+		-webkit-transform: rotate(360deg); /* Chrome, Safari, Opera */
+		transform: rotate(360deg);
+		transform-origin: 50% 50%;
+	}
+}

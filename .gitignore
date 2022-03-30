@@ -1,0 +1,5 @@
+# https://docs.opencv.org/4.5.5/opencv.js
+lib/opencv.js
+
+# https://trackingjs.com/bower/tracking.js/build/tracking-min.js
+lib/tracking.js

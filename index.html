@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+		<symbol id="left" viewBox="0 0 732 825.3">
+			<path d="M266.3,415.1c6.7,5.9,13.8,11.3,20.1,17.6c66.4,67.2,132.6,134.5,199,201.7c10.5,10.6,15.6,22.7,11.8,37.3
+			c-6.9,26.8-39,35.8-59.3,16.3c-18.2-17.5-35.6-35.9-53.4-53.9C321.9,570.5,259.3,507,196.6,443.4c-20.9-21.3-20.9-40.4,0.1-61.8
+			c79.6-80.8,159.2-161.6,238.9-242.3c21.4-21.7,54.4-14,61.7,14.2c3.8,14.7-1.4,26.7-11.9,37.3c-45.3,45.7-90.1,91.9-135.7,137.2
+			c-27.6,27.5-56.4,53.9-84.6,80.8C265.5,411,265.9,413,266.3,415.1z"/>
+		</symbol>
+	</svg>
+
+	<div id="photo-edit">
+		<div class="top-buttons">
+			<div class="input-file">
+				<input type="file" id="file">
+				<label for="corner-detection-method">Corner detection method</label>
+				<select id="corner-detection-method">
+					<option value="none">None</option>
+					<option value="tracking-js">TrackingJS</option>
+					<option value="opencv-harris">OpenCV (harris)</option>
+					<option value="opencv-shithomas">OpenCV (shiThomas)</option>
+				</select>
+			</div>
+			<div class="rotate-buttons">
+				<div>
+					<div onclick="rotateLeft()" title="Rotate left">
+						<svg class="icon"><use xlink:href="#left" /></svg>
+					</div>
+					<div onclick="rotateRight()" title="Rotate right">
+						<svg class="icon right"><use xlink:href="#left" /></svg>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<canvas id="canvas"></canvas>
+
+		<div id="bottom-controls" class="controls">
+			<div class="sliders step2">
+				<div class="slider">
+					<label for="brightness">Brightness</label>
+					<input id="brightness" type="range" name="brightness" min="-100" max="100">
+				</div>
+				<div class="slider">
+					<label for="contrast">Contrast</label>
+					<input id="contrast" type="range" name="contrast" min="0" max="2" step="0.1">
+				</div>
+				<div class="slider">
+					<label for="saturation">Saturation</label>
+					<input id="saturation" type="range" name="saturation" min="0" max="2" step="0.1">
+				</div>
+				<div class="slider">
+					<label for="sharpness">Sharpness</label>
+					<input id="sharpness" type="range" name="sharpness" min="-1" max="1" step="0.1">
+				</div>
+			</div>
+			<div class="buttons">
+				<button class="button step1" onclick="crop()">Crop image</button>
+				<div>
+					<button class="button step2" onclick="autoImproveImage()">Automatic correction</button>
+					<button class="button step2" onclick="resetFilters()">Reset filters</button>
+				</div>
+				<div>
+					<button class="button step2" onclick="resetCrop()">Cancel crop</button>
+					<button class="button step2" onclick="saveImageAsDataUrl()">Confirm crop</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="editor-loading" class="loading shown">
+			<div class="label">Loading...</div>
+			<div class="spin"></div>
+		</div>
+	</div>
+
+	<script src="https://trackingjs.com/bower/tracking.js/build/tracking-min.js"></script>
+	<script src="https://docs.opencv.org/4.5.5/opencv.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>
